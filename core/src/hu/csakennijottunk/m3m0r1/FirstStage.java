@@ -11,6 +11,7 @@ import hu.csanyzeg.master.MyBaseClasses.Scene2D.MyStage;
 public class FirstStage extends MyStage {
     Aktor aktor;
     Aktor aktor2;
+    FirstStage firstStage;
 
     public FirstStage(MyGame game) {
         super(new ExtendViewport(640, 480), game);

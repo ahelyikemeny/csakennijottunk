@@ -11,11 +11,16 @@ public class GameScreen extends MyScreen {
 
     @Override
     protected void afterAssetsLoaded() {
-        addStage(new FirstStage(game), 0, true);
+        addStage(new MainMenu(game), 0, true);
     }
 
     @Override
     public AssetList getAssetList() {
         return null;
     }
+
+
+
+
+
 }
