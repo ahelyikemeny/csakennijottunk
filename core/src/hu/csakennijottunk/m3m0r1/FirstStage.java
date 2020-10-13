@@ -28,5 +28,6 @@ public class FirstStage extends MyStage {
                 System.out.println("klikk");
             }
         });
+        addBackButtonScreenBackByStackPopListener();
     }
 }

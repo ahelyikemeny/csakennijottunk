@@ -10,32 +10,27 @@ import hu.csanyzeg.master.MyBaseClasses.Scene2D.OneSpriteActor;
 import hu.csanyzeg.master.MyBaseClasses.Scene2D.OneSpriteStaticActor;
 
 public class StartButton extends OneSpriteStaticActor {
-   FirstStage firstStage;
+    FirstStage firstStage;
 
     public void setMainStage(FirstStage firstStage) {
         super.setStage(firstStage);
     }
 
     public StartButton(MyGame game) {
-    super(game, "start.jpg");
-this.setSize(200,100);
-    this.addListener(new ClickListener(){
-        @Override
-        public void clicked(InputEvent event, float x, float y) {
-            super.clicked(event, x, y);
-setStage(firstStage);
+        super(game, "start.jpg");
+        this.setSize(200, 100);
+        this.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                super.clicked(event, x, y);
+                game.setScreen(new GameScreen(game));
 
 
             }
 
-    });
+        });
 
-}
-
-
-
-
-
+    }
 
 
 }

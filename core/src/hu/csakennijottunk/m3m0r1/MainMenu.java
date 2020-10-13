@@ -20,35 +20,26 @@ InfoButton infoButton;
 public MainMenu(MyGame game) {
 
     super(new ExtendViewport(640, 480), game);
-startButton = new StartButton(game);
-addActor(startButton);
-startButton.setY(380);
-startButton.setX(240);
-optionsButton = new OptionsButton(game);
-addActor(optionsButton);
-optionsButton.setY(180);
-optionsButton.setX(240);
-exitButton = new ExitButton(game);
-addActor(exitButton);
-exitButton.setY(0);
-exitButton.setX(240);
-infoButton = new InfoButton(game);
-addActor(infoButton);
-infoButton.setY(0);
-infoButton.setX(0);
+    startButton = new StartButton(game);
+    addActor(startButton);
+    startButton.setY(380);
+    startButton.setX(240);
+    optionsButton = new OptionsButton(game);
+    addActor(optionsButton);
+    optionsButton.setY(180);
+    optionsButton.setX(240);
+    exitButton = new ExitButton(game);
+    addActor(exitButton);
+    exitButton.setY(0);
+    exitButton.setX(240);
+    infoButton = new InfoButton(game);
+    addActor(infoButton);
+    infoButton.setY(0);
+    infoButton.setX(0);
 
 
-
-
-
-
-
-
-
-
-
-
-setCameraResetToLeftBottomOfScreen();
+    setCameraResetToLeftBottomOfScreen();
+    addBackButtonScreenBackByStackPopListener();
 }
 
 
