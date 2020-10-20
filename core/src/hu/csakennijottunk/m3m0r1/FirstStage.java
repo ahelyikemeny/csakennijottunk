@@ -10,6 +10,10 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 
 import hu.csanyzeg.master.MyBaseClasses.Game.MyGame;
 import hu.csanyzeg.master.MyBaseClasses.Scene2D.MyStage;
+import hu.csanyzeg.master.MyBaseClasses.Timers.IntervalTimerListener;
+import hu.csanyzeg.master.MyBaseClasses.Timers.TickTimer;
+import hu.csanyzeg.master.MyBaseClasses.Timers.TickTimerListener;
+import hu.csanyzeg.master.MyBaseClasses.Timers.Timer;
 
 public class FirstStage extends MyStage {
     Aktor aktor;
@@ -17,9 +21,9 @@ public class FirstStage extends MyStage {
     FirstStage firstStage;
 
 
-    public int[] generateMap(int cardIDNumber){
-        int [] cards = new int[cardIDNumber*2];
-        for(int i = 0; i<cardIDNumber * 2; i++){
+    public int[] generateMap(int cardIDNumber) {
+        int[] cards = new int[cardIDNumber * 2];
+        for (int i = 0; i < cardIDNumber * 2; i++) {
             cards[i] = i / 2;
         }
 
@@ -36,16 +40,16 @@ public class FirstStage extends MyStage {
         return cards;
     }
 
-    public void newGame(int cardIDNumber, int mapWidth){
-        int [] cardsArray = generateMap(cardIDNumber);
+    public void newGame(int cardIDNumber, int mapWidth) {
+        int[] cardsArray = generateMap(cardIDNumber);
         int count = 0;
         int row = 0;
-        for (int i = 0; i < cardsArray.length; i++){
-            addActor(new CardActor(game, cardsArray[i], count * 100,getHeight() - 100f - row * 120));
+        for (int i = 0; i < cardsArray.length; i++) {
+            addActor(new CardActor(game, cardsArray[i], count * 100, getHeight() - 100f - row * 120));
 
             //System.out.print(cardsArray[i] + " ");
             count++;
-            if (count == mapWidth){
+            if (count == mapWidth) {
                 //System.out.println();
                 count = 0;
                 row++;
@@ -56,23 +60,23 @@ public class FirstStage extends MyStage {
 
     CardActor firstClick = null;
 
-    public void clickCard(CardActor a){
-        if (firstClick == null){
+    public void clickCard(CardActor a) {
+        if (firstClick == null) {
             firstClick = a;
             firstClick.setColor(Color.RED);
             return;
         }
-        if (firstClick.hashCode() != a.hashCode()){
-            if (firstClick.getImageID() == a.getImageID()){
+        if (firstClick.hashCode() != a.hashCode()) {
+            if (firstClick.getImageID() == a.getImageID()) {
                 firstClick.remove();
                 a.remove();
                 int count = 0;
-                for(Actor ac : getActors()){
-                    if (ac instanceof CardActor){
+                for (Actor ac : getActors()) {
+                    if (ac instanceof CardActor) {
                         count++;
                     }
                 }
-                if (count==0){
+                if (count == 0) {
                     System.out.println("Gratulálok!");
                 }
             }
@@ -81,6 +85,9 @@ public class FirstStage extends MyStage {
         firstClick = null;
     }
 
+
+    public TickTimer secTimer;
+    public int sec = 0;
 
     public FirstStage(MyGame game) {
         super(new ExtendViewport(640, 480), game);
@@ -108,6 +115,15 @@ public class FirstStage extends MyStage {
         }
 
  */
+        secTimer = new TickTimer(1, true, new TickTimerListener() {
+            @Override
+            public void onTick(Timer sender, float correction) {
+                super.onTick(sender, correction);
+                System.out.println(sec);
+                sec++;
+            }
+        });
+        addTimer(secTimer);
 
     }
 }
