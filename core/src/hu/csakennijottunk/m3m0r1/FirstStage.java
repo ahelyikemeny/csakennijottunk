@@ -87,7 +87,7 @@ public class FirstStage extends MyStage {
 
 
     public TickTimer secTimer;
-    public int sec = 0;
+    public int sec = 99;
 
     public FirstStage(MyGame game) {
         super(new ExtendViewport(640, 480), game);
@@ -120,7 +120,7 @@ public class FirstStage extends MyStage {
             public void onTick(Timer sender, float correction) {
                 super.onTick(sender, correction);
                 System.out.println(sec);
-                sec++;
+                sec--;
             }
         });
         addTimer(secTimer);

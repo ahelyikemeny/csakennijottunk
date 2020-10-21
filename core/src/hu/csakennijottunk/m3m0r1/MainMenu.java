@@ -15,11 +15,13 @@ public class MainMenu extends MyStage {
     OptionsButton optionsButton;
     ExitButton exitButton;
     InfoButton infoButton;
-
+background backGround;
 
     public MainMenu(MyGame game) {
 
         super(new ExtendViewport(640, 480), game);
+        backGround = new background(game);
+        addActor(backGround);
         startButton = new StartButton(game);
         addActor(startButton);
         startButton.setY(380);
@@ -36,6 +38,8 @@ public class MainMenu extends MyStage {
         addActor(infoButton);
         infoButton.setY(0);
         infoButton.setX(0);
+
+
 
 
         setCameraResetToLeftBottomOfScreen();
