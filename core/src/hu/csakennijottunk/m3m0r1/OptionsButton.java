@@ -5,7 +5,7 @@ import hu.csanyzeg.master.MyBaseClasses.Scene2D.OneSpriteStaticActor;
 
 public class OptionsButton extends OneSpriteStaticActor {
     public OptionsButton(MyGame game) {
-        super(game, "settings.jpg");
+        super(game, "settings1.png");
         this.setSize(200,100);
 
     }
