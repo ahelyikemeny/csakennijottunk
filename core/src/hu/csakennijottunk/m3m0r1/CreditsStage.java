@@ -18,7 +18,7 @@ public class CreditsStage extends MyStage {
         Label.LabelStyle labelStyle = new Label.LabelStyle();
         labelStyle.font = game.getMyAssetManager().getFont("latinwd.ttf");
         labelStyle.fontColor = Color.BLUE;
-
+ExitButton exitButton;
 addActor(new Creditbackground(game));
 
         MyLabel label = new MyLabel(game, "Creators:", labelStyle);
@@ -58,8 +58,10 @@ addActor(new Creditbackground(game));
         addActor(label);
 
 
+exitButton = new ExitButton(game);
+addActor(exitButton);
+exitButton.setPosition(280,0);
 
-        addActor(new ExitButton(game));
 
     }
 }

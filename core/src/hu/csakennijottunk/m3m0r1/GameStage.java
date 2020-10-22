@@ -15,11 +15,12 @@ import hu.csanyzeg.master.MyBaseClasses.Timers.Timer;
 import hu.csanyzeg.master.MyBaseClasses.UI.MyLabel;
 
 public class GameStage extends MyStage {
-    private final Object ExitButton = null;
+   ExitButton exitButton;
     Aktor aktor;
     Aktor aktor2;
     GameStage firstStage;
     boolean gameOver = false;
+
 
     public int[] generateMap(int cardIDNumber) {
         int[] cards = new int[cardIDNumber * 2];
@@ -171,7 +172,7 @@ public class GameStage extends MyStage {
 
         ExitButton exitButton = new ExitButton(game);
         addActor(new ExitButton(game ));
-        exitButton.setPosition(640,480);
+        exitButton.setX(400);
 
 
 
