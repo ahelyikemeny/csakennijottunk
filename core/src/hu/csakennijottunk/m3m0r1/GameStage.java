@@ -15,6 +15,7 @@ import hu.csanyzeg.master.MyBaseClasses.Timers.Timer;
 import hu.csanyzeg.master.MyBaseClasses.UI.MyLabel;
 
 public class GameStage extends MyStage {
+    private final Object ExitButton = null;
     Aktor aktor;
     Aktor aktor2;
     GameStage firstStage;
@@ -25,7 +26,7 @@ public class GameStage extends MyStage {
         for (int i = 0; i < cardIDNumber * 2; i++) {
             cards[i] = i / 2;
         }
-
+        addActor(new BackgroundGame(game));
         RandomXS128 randomXS128 = new RandomXS128();
 
         for (int i = 0; i < cards.length * 2; i++) {
@@ -168,6 +169,12 @@ public class GameStage extends MyStage {
         });
         addTimer(secTimer);
 
-        addActor(new ExitButton(game));
+        ExitButton exitButton = new ExitButton(game);
+        addActor(new ExitButton(game ));
+        exitButton.setPosition(640,480);
+
+
+
+
     }
 }
