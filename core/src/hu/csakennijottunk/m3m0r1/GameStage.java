@@ -134,11 +134,6 @@ public class GameStage extends MyStage {
         addBackButtonScreenBackByStackPopListener();
 
 
-        Label.LabelStyle labelStyle = new Label.LabelStyle();
-        labelStyle.font = game.getMyAssetManager().getFont("latinwd.ttf");
-        timerLabel = new MyLabel(game, sec + "", labelStyle);
-        addActor(timerLabel);
-        timerLabel.setPosition(560,300);
 
 
         newGame(8, 4);
@@ -176,6 +171,11 @@ exitbuttonright = new Exitbuttonright(game);
 exitbuttonright.setX(450);
 
 
+        Label.LabelStyle labelStyle = new Label.LabelStyle();
+        labelStyle.font = game.getMyAssetManager().getFont("latinwd.ttf");
+        timerLabel = new MyLabel(game, sec + "", labelStyle);
+        addActor(timerLabel);
+        timerLabel.setPosition(410,300);
 
     }
 }
