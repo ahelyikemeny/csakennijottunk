@@ -15,7 +15,8 @@ import hu.csanyzeg.master.MyBaseClasses.Timers.Timer;
 import hu.csanyzeg.master.MyBaseClasses.UI.MyLabel;
 
 public class GameStage extends MyStage {
-   ExitButton exitButton;
+   Exitbuttonright exitbuttonright;
+    ExitButton exitButton;
     Aktor aktor;
     Aktor aktor2;
     GameStage firstStage;
@@ -170,10 +171,9 @@ public class GameStage extends MyStage {
         });
         addTimer(secTimer);
 
-        ExitButton exitButton = new ExitButton(game);
-        addActor(new ExitButton(game ));
-        exitButton.setX(400);
-
+exitbuttonright = new Exitbuttonright(game);
+   addActor(exitbuttonright);
+exitbuttonright.setX(450);
 
 
 
