@@ -1,6 +1,7 @@
 package hu.csakennijottunk.m3m0r1;
 
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 import hu.csanyzeg.master.MyBaseClasses.Game.MyGame;
@@ -27,9 +28,19 @@ public class CardActor extends OneSpriteStaticActor {
             }
         });
 
+        hideCard();
     }
 
     public int getImageID() {
         return imageID;
     }
+
+    public void hideCard(){
+        setTexture("hatulja.png");
+    }
+
+    public void showCard(){
+        setTexture(images[imageID]);
+    }
+
 }
