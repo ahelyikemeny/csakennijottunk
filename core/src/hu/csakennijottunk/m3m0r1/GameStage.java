@@ -19,6 +19,7 @@ public class GameStage extends MyStage {
     Aktor aktor2;
     GameStage firstStage;
     boolean gameOver = false;
+    ExitButton exitButton;
 
     public int[] generateMap(int cardIDNumber) {
         int[] cards = new int[cardIDNumber * 2];
@@ -168,6 +169,9 @@ public class GameStage extends MyStage {
         });
         addTimer(secTimer);
 
-        addActor(new ExitButton(game));
+        exitButton = new ExitButton(game);
+        addActor(exitButton);
+        exitButton.setX(400);
+
     }
 }

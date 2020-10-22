@@ -19,12 +19,14 @@ public class CreditsStage extends MyStage {
         labelStyle.font = game.getMyAssetManager().getFont("latinwd.ttf");
         labelStyle.fontColor = Color.BROWN;
 
-        MyLabel label = new MyLabel(game, "Készítők", labelStyle);
+        MyLabel label = new MyLabel(game, "Készítok", labelStyle);
         label.setFontScale(0.5f);
         label.setPosition(20,100);
         addActor(label);
 
         addActor(new ExitButton(game));
+
+
 
     }
 }
