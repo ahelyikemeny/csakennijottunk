@@ -8,7 +8,7 @@ import hu.csanyzeg.master.MyBaseClasses.Game.MyGame;
 import hu.csanyzeg.master.MyBaseClasses.Scene2D.OneSpriteStaticActor;
 
 public class CardActor extends OneSpriteStaticActor {
-    private static final String[] images = {"badlogic.jpg", "start.jpg", "settings.jpg", "credits.jpg"};
+    private static final String[] images = {"lap1.png", "lap2.png", "lap3.png", "lap4.png", "lap5.png", "lap6.png", "lap7.png, "lap8.png"};
 
     protected int imageID;
 
