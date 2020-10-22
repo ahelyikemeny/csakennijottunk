@@ -1,26 +1,24 @@
 package hu.csakennijottunk.m3m0r1;
 
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.RandomXS128;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
-import com.badlogic.gdx.utils.viewport.Viewport;
 
 import hu.csanyzeg.master.MyBaseClasses.Game.MyGame;
 import hu.csanyzeg.master.MyBaseClasses.Scene2D.MyStage;
-import hu.csanyzeg.master.MyBaseClasses.Scene2D.OneSpriteStaticActor;
-import hu.csanyzeg.master.MyBaseClasses.Timers.IntervalTimerListener;
 import hu.csanyzeg.master.MyBaseClasses.Timers.TickTimer;
 import hu.csanyzeg.master.MyBaseClasses.Timers.TickTimerListener;
 import hu.csanyzeg.master.MyBaseClasses.Timers.Timer;
+import hu.csanyzeg.master.MyBaseClasses.UI.MyLabel;
 
-public class FirstStage extends MyStage {
+public class GameStage extends MyStage {
     Aktor aktor;
     Aktor aktor2;
-    FirstStage firstStage;
-
+    GameStage firstStage;
+    boolean gameOver = false;
 
     public int[] generateMap(int cardIDNumber) {
         int[] cards = new int[cardIDNumber * 2];
@@ -63,6 +61,9 @@ public class FirstStage extends MyStage {
     boolean clickActive = true;
 
     public void clickCard(CardActor a) {
+        if (gameOver){
+            return;
+        }
         if (!clickActive){
             return;
         }
@@ -83,65 +84,90 @@ public class FirstStage extends MyStage {
                     }
                 }
                 if (count == 0) {
-                    System.out.println("Gratulálok!");
+                    Label.LabelStyle labelStyle = new Label.LabelStyle();
+                    labelStyle.font = game.getMyAssetManager().getFont("latinwd.ttf");
+                    MyLabel label = new MyLabel(game, "Gratulálok!", labelStyle);
+                    addActor(label);
+                    label.setPositionCenterOfActorToCenterOfViewport();
+                    label.addListener(new ClickListener(){
+                        @Override
+                        public void clicked(InputEvent event, float x, float y) {
+                            super.clicked(event, x, y);
+                            game.setScreenBackByStackPop();
+                        }
+                    });
                 }
+                clickActive = true;
+                firstClick = null;
+
+            }else{
+                TickTimer timer = new TickTimer(2, false, new TickTimerListener(){
+                    @Override
+                    public void onTick(Timer sender, float correction) {
+                        super.onTick(sender, correction);
+                        removeTimer(sender);
+                        firstClick.hideCard();
+                        a.hideCard();
+                        firstClick = null;
+                        clickActive = true;
+                    }
+                });
+                addTimer(timer);
+                clickActive = false;
             }
         }
-        clickActive = false;
-        TickTimer timer = new TickTimer(2, false, new TickTimerListener(){
-            @Override
-            public void onTick(Timer sender, float correction) {
-                super.onTick(sender, correction);
-                removeTimer(sender);
-                firstClick.hideCard();
-                a.hideCard();
-                firstClick = null;
-                clickActive = true;
-            }
-        });
-        addTimer(timer);
+
 
     }
 
 
     public TickTimer secTimer;
     public int sec = 99;
+    public MyLabel timerLabel;
 
-    public FirstStage(MyGame game) {
+    public GameStage(MyGame game) {
         super(new ExtendViewport(640, 480), game);
-        /*aktor=new Aktor(game);
-        addActor(aktor);
-        aktor.setX(10);
-        aktor.setY(51);
-        aktor2 = new Aktor(game);
-        addActor(aktor2);
-        aktor2.addListener(new ClickListener(){
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                super.clicked(event, x, y);
-                System.out.println("klikk");
-            }
-        });
 
-         */
         addBackButtonScreenBackByStackPopListener();
 
-        newGame(4, 3);
-/*
-        for(Actor a : getActors()) {
-            System.out.println(a);
-        }
 
- */
+        Label.LabelStyle labelStyle = new Label.LabelStyle();
+        labelStyle.font = game.getMyAssetManager().getFont("latinwd.ttf");
+        timerLabel = new MyLabel(game, sec + "", labelStyle);
+        addActor(timerLabel);
+        timerLabel.setPosition(560,300);
+
+
+        newGame(8, 4);
+
         secTimer = new TickTimer(1, true, new TickTimerListener() {
             @Override
             public void onTick(Timer sender, float correction) {
                 super.onTick(sender, correction);
                 System.out.println(sec);
                 sec--;
+                timerLabel.setText(sec+"");
+                if (sec == 0){
+                    gameOver = true;
+                    Label.LabelStyle labelStyle = new Label.LabelStyle();
+                    labelStyle.font = game.getMyAssetManager().getFont("latinwd.ttf");
+                    MyLabel label = new MyLabel(game, "Game Over", labelStyle);
+                    addActor(label);
+                    label.setPositionCenterOfActorToCenterOfViewport();
+                    label.addListener(new ClickListener(){
+                        @Override
+                        public void clicked(InputEvent event, float x, float y) {
+                            super.clicked(event, x, y);
+                            game.setScreenBackByStackPop();
+                        }
+                    });
+                    removeTimer(sender);
+                }
+
             }
         });
         addTimer(secTimer);
 
+        addActor(new ExitButton(game));
     }
 }
