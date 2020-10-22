@@ -24,4 +24,7 @@ public class OneSpriteStaticActor extends OneSpriteActor {
         return sprite.getTexture();
     }
 
+    public void setTexture(String hash){
+        sprite.setTexture(game.getMyAssetManager().getTexture(hash));
+    }
 }

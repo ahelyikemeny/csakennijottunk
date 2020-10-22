@@ -10,6 +10,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 
 import hu.csanyzeg.master.MyBaseClasses.Game.MyGame;
 import hu.csanyzeg.master.MyBaseClasses.Scene2D.MyStage;
+import hu.csanyzeg.master.MyBaseClasses.Scene2D.OneSpriteStaticActor;
 import hu.csanyzeg.master.MyBaseClasses.Timers.IntervalTimerListener;
 import hu.csanyzeg.master.MyBaseClasses.Timers.TickTimer;
 import hu.csanyzeg.master.MyBaseClasses.Timers.TickTimerListener;
@@ -59,14 +60,19 @@ public class FirstStage extends MyStage {
     }
 
     CardActor firstClick = null;
+    boolean clickActive = true;
 
     public void clickCard(CardActor a) {
+        if (!clickActive){
+            return;
+        }
         if (firstClick == null) {
             firstClick = a;
-            firstClick.setColor(Color.RED);
+            firstClick.showCard();
             return;
         }
         if (firstClick.hashCode() != a.hashCode()) {
+            a.showCard();
             if (firstClick.getImageID() == a.getImageID()) {
                 firstClick.remove();
                 a.remove();
@@ -81,8 +87,20 @@ public class FirstStage extends MyStage {
                 }
             }
         }
-        firstClick.setColor(Color.WHITE);
-        firstClick = null;
+        clickActive = false;
+        TickTimer timer = new TickTimer(2, false, new TickTimerListener(){
+            @Override
+            public void onTick(Timer sender, float correction) {
+                super.onTick(sender, correction);
+                removeTimer(sender);
+                firstClick.hideCard();
+                a.hideCard();
+                firstClick = null;
+                clickActive = true;
+            }
+        });
+        addTimer(timer);
+
     }
 
 
